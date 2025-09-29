@@ -1,5 +1,6 @@
 import WhoAmI126 from "./126_components_props/Props";
 import WhoAmI129 from "./129_components_state/State";
+import WhoAmI131 from "./131_events_this/EventsThis";
 
 function App() {
   return (
@@ -22,7 +23,15 @@ function App() {
       <div>
         <h1>129. Components state</h1>
         <WhoAmI129 name="John" surname="Smith" link="facebook.com" />
-        <WhoAmI129 name="Felicia" surname="Shepr" link="instagram.com" />
+        {/* <WhoAmI129 name="Felicia" surname="Shepr" link="instagram.com" /> */}
+      </div>
+
+      <hr />
+
+      <div>
+        <h1>131. Events and This in React</h1>
+        <WhoAmI131 name="Sara" surname="Stutc" link="facebook.com" />
+        {/* <WhoAmI131 name="Golld" surname="Calver" link="instagram.com" /> */}
       </div>
     </>
   );
