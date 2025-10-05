@@ -33,6 +33,14 @@ function App() {
         <WhoAmI131 name="Sara" surname="Stutc" link="facebook.com" />
         {/* <WhoAmI131 name="Golld" surname="Calver" link="instagram.com" /> */}
       </div>
+
+      <hr />
+
+      <div>
+        <h1>138-143. Style in React</h1>
+        <h2>139. Inline Style</h2>
+        <InlineStyle139 />
+      </div>
     </>
   );
 }
