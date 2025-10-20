@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Form from "./Ref_Form";
 
 const DynamicGreating = (props) => {
   return (
@@ -59,6 +60,8 @@ class Counter extends Component {
 function App() {
   return (
     <>
+      <Form />
+
       <Counter render={(counter) => <Message counter={counter} />} />
 
       <HelloGreating />
