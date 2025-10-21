@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form from "./Ref_Form";
+import Portals from "./Portals";
 
 const DynamicGreating = (props) => {
   return (
@@ -60,7 +61,9 @@ class Counter extends Component {
 function App() {
   return (
     <>
-      <Form />
+      <Portals />
+
+      {/* <Form />
 
       <Counter render={(counter) => <Message counter={counter} />} />
 
@@ -68,7 +71,7 @@ function App() {
       <DynamicGreating color={"red"}>
         <h2>asasdasd</h2>
         <h2>adac2 9- -14u-95 </h2>
-      </DynamicGreating>
+      </DynamicGreating> */}
     </>
   );
 }
