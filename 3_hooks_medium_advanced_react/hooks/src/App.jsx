@@ -1,6 +1,20 @@
-import { Component, useState, useEffect } from "react";
+import { Component, useState, useEffect, useCallback, useMemo } from "react";
 import { Container } from "react-bootstrap";
+import FormRef from "./FormRef";
 import "./App.css";
+
+const countTotal = (num) => {
+  console.log("counting...");
+  return num + 10;
+};
+
+/* const getSomeImages = () => {
+  console.log("fetching");
+  return [
+    "https://png.pngtree.com/thumb_back/fw800/background/20230518/pngtree-one-of-the-waterfalls-in-iceland-with-a-dark-cloudy-setting-image_2584805.jpg",
+    "https://img.freepik.com/fotos-premium/islandia-nascer-do-sol-foto-livre-fundo-hd_915071-95366.jpg",
+  ];
+}; */
 
 /* class Slider extends Component {
   constructor(props) {
@@ -84,6 +98,14 @@ const Slider = () => {
   const [autoplay, setAutoplay] = useState(false);
   /* const [state, setState] = useState({ slide: 0, autoplay: false }); */
 
+  const getSomeImages = useCallback(() => {
+    console.log("fetching");
+    return [
+      "https://png.pngtree.com/thumb_back/fw800/background/20230518/pngtree-one-of-the-waterfalls-in-iceland-with-a-dark-cloudy-setting-image_2584805.jpg",
+      "https://img.freepik.com/fotos-premium/islandia-nascer-do-sol-foto-livre-fundo-hd_915071-95366.jpg",
+    ];
+  }, []);
+
   function logging() {
     console.log("log!");
   }
@@ -122,16 +144,47 @@ const Slider = () => {
     setState((state) => ({ ...state, autoplay: !state.autoplay }));
   } */
 
+  const total = useMemo(() => {
+    return countTotal(slide);
+  }, [slide]);
+
+  /* const style = {
+    color: slide > 4 ? "red" : "black",
+  }; */
+
+  const style = useMemo(
+    () => ({
+      color: slide > 4 ? "red" : "black",
+    }),
+    [slide]
+  );
+
+  useEffect(() => {
+    console.log("styles!");
+  }, [style]);
+
   return (
     <Container>
       <div className="slider w-50 m-auto">
-        <img
+        {/* <img
           className="d-block w-100"
           src="https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
           alt="slide"
-        />
+        /> */}
+
+        {/* {getSomeImages().map((url, i) => {
+          return (
+            <img key={i} className="d-block w-100" src={url} alt="slide" />
+          );
+        })} */}
+
+        <Slide getSomeImages={getSomeImages} />
+
         <div className="text-center mt-5">
           Active slide {slide} <br /> {autoplay ? "auto" : null}
+        </div>
+        <div style={style} className="text-center mt-5">
+          Total slides: {total}
         </div>
         <div className="buttons mt-3">
           <button
@@ -155,6 +208,22 @@ const Slider = () => {
   );
 };
 
+const Slide = ({ getSomeImages }) => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    setImages(getSomeImages());
+  }, [getSomeImages]);
+
+  return (
+    <>
+      {images.map((url, i) => (
+        <img key={i} className="d-block w-100" src={url} alt="slide" />
+      ))}
+    </>
+  );
+};
+
 function App() {
   const [slider, setSlider] = useState(true);
 
@@ -162,6 +231,7 @@ function App() {
     <>
       <button onClick={() => setSlider(false)}>Click</button>
       {slider ? <Slider /> : null}
+      <FormRef />
     </>
   );
 }
