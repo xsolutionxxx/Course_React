@@ -1,6 +1,7 @@
 import { Component, useState, useEffect, useCallback, useMemo } from "react";
 import { Container } from "react-bootstrap";
 import FormRef from "./FormRef";
+import OwnHooks from "./OwnHooks";
 import "./App.css";
 
 const countTotal = (num) => {
@@ -232,6 +233,7 @@ function App() {
       <button onClick={() => setSlider(false)}>Click</button>
       {slider ? <Slider /> : null}
       <FormRef />
+      <OwnHooks />
     </>
   );
 }
