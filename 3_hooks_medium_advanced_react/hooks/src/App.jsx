@@ -3,6 +3,8 @@ import { Container } from "react-bootstrap";
 import FormRef from "./FormRef";
 import OwnHooks from "./OwnHooks";
 import Memo from "./Memo";
+import Form from "./Form";
+import dataContext from "./context";
 import "./App.css";
 
 const countTotal = (num) => {
@@ -226,26 +228,67 @@ const Slide = ({ getSomeImages }) => {
   );
 };
 
+const { Provider, Consumer } = dataContext;
+
+/* class InputComponent extends Component {
+  static contextType = dataContext;
+
+  render() {
+    return (
+      <>
+        <Consumer>
+        {(value) => {
+          return (
+            <input
+              value={value.mail.name}
+              type="email"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="name@example.com"
+            />
+          );
+        }}
+      </Consumer>
+        <input
+          value={this.context.mail.name}
+          type="email"
+          className="form-control"
+          id="exampleFormControlInput1"
+          placeholder="name@example.com"
+        />
+      </>
+    );
+  }
+}
+
+InputComponent.contextType = dataContext; */
+
 function App() {
   /* const [slider, setSlider] = useState(true); */
   const [data, setData] = useState({
     mail: {
-      name: "name@example.com",
+      name: "nazar@example.com",
     },
     text: "some text",
+    forceChangeMail: forceChangeMail,
   });
 
-  const onLog = useCallback(() => {
+  function forceChangeMail() {
+    setData({ ...data, mail: { name: "test@gmail.com" } });
+  }
+
+  /* const onLog = useCallback(() => {
     console.log("wow");
-  }, []);
+  }, []); */
 
   return (
-    <>
+    <Provider value={data}>
       {/* <button onClick={() => setSlider(false)}>Click</button>
       {slider ? <Slider /> : null}
       <FormRef />
       <OwnHooks /> */}
-      <Memo mail={data.mail} text={data.text} onLog={onLog} />
+      <Form />
+      {/* <Memo mail={data.mail} text={data.text} onLog={onLog} /> */}
       <button
         onClick={() =>
           setData({
@@ -253,12 +296,13 @@ function App() {
               name: "name@example.com",
             },
             text: "some text",
+            forceChangeMail: forceChangeMail,
           })
         }
       >
         Click me
       </button>
-    </>
+    </Provider>
   );
 }
 
