@@ -5,6 +5,12 @@ import OwnHooks from "./OwnHooks";
 import Memo from "./Memo";
 import Form from "./Form";
 import dataContext from "./context";
+import SliderReducer from "./Reducer";
+import {
+  SliderWithFirstFetch,
+  SliderWithSecondFetch,
+  HelloWithLogger,
+} from "./PatternHOC";
 import "./App.css";
 
 const countTotal = (num) => {
@@ -287,9 +293,9 @@ function App() {
       {slider ? <Slider /> : null}
       <FormRef />
       <OwnHooks /> */}
-      <Form />
+      {/* <Form /> */}
       {/* <Memo mail={data.mail} text={data.text} onLog={onLog} /> */}
-      <button
+      {/* <button
         onClick={() =>
           setData({
             mail: {
@@ -301,7 +307,11 @@ function App() {
         }
       >
         Click me
-      </button>
+      </button> */}
+      {/* <SliderReducer initial={false} /> */}
+      <HelloWithLogger />
+      <SliderWithFirstFetch />
+      <SliderWithSecondFetch />
     </Provider>
   );
 }
